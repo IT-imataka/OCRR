@@ -12,19 +12,27 @@
     </div>
     <script type="module">
       import { createWorker } from "tesseract.js";
+      const worker = createWorker({
+        logger: (m) => console.log(m),
+      });
+
+      (async () => {
+        await worker.load();
+        await worker.loadLanguage("eng");
+        await worker.initialize("eng");
+        const {
+          data: { text },
+        } = await worker.recognize(
+          "https://tesseract.projectnaptha.com/img/eng_bw.png"
+        );
+        console.log(text);
+        await worker.terminate();
+      })();
     </script>
     <script>
       const inpimg = document.getElementById("inpimg");
       inpimg.addEventListener("change", (event) => {
         const imgfile = event.target.files[0];
-        (async () => {
-          const worker = await createWorker();
-          const ret = await worker.recognize(imgfile, "jpn", {
-            logger: (m) => console.log(m),
-          });
-          console.log(ret.data.text);
-          await worker.terminate();
-        })();
       });
     </script>
   </body>
