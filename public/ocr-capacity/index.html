@@ -11,9 +11,9 @@
       <div class="output" id="output"></div>
     </div>
     <script type="module">
-      // tesseract.jsを使用してOCRを実行する
       import { createWorker } from "tesseract.js";
-
+    </script>
+    <script>
       (async () => {
         const worker = await createWorker("jpn");
         const ret = await worker.recognize(
