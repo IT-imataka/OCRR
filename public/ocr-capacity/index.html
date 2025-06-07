@@ -19,11 +19,9 @@
           logger: (m) => {
             console.log(m);
           },
-        }).then({
-          data: (text) => {
-            console.log(imgfile);
-            document.getElementById("output").innerHTML = text;
-          },
+        }).then(({ data: { text } }) => {
+          console.log(imgfile);
+          document.getElementById("output").innerHTML = text;
         });
       });
     </script>
