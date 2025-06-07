@@ -12,13 +12,14 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script type="module">
-      const worker = Tesseract.createWorker({
-        logger: (m) => console.log(m),
-      });
       const inpimg = document.getElementById("inpimg");
       inpimg.addEventListener("change", (event) => {
         const imgfile = event.target.files[0];
-        Tesseract.recognize(imgfile).then({
+        Tesseract.recognize(imgfile, "jpn", {
+          logger: (m) => {
+            console.log(m);
+          },
+        }).then({
           data: (text) => {
             console.log(text);
             // document.getElementById("output").innerHTML = text;
