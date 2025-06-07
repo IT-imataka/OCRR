@@ -18,7 +18,7 @@
       const inpimg = document.getElementById("inpimg");
       inpimg.addEventListener("change", (event) => {
         const imgfile = event.target.files[0];
-        TesseractF.recognize(imgfile).then({
+        Tesseract.recognize(imgfile).then({
           data: (text) => {
             console.log(text);
             // document.getElementById("output").innerHTML = text;
