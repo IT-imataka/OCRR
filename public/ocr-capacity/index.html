@@ -8,8 +8,19 @@
   <body>
     <div class="wrapper">
       <input type="file" name="capacity" id="imgfile" />
-      <canvas class="output" id="output"></canvas>
+      <div class="output" id="output"></div>
     </div>
-    <script></script>
+    <script>
+      import { createWorker } from "tesseract.js";
+
+      (async () => {
+        const worker = await createWorker("jpn");
+        const ret = await worker.recognize(
+          document.getElementById("imgfile").files[0]
+        );
+        console.log(ret.data.text);
+        await worker.terminate();
+      })();
+    </script>
   </body>
 </html>
