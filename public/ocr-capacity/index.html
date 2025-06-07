@@ -8,12 +8,13 @@
   <body>
     <div class="wrapper">
       <input type="file" name="capacity" id="inpimg" />
+      <canvas style="display: none"></canvas>
       <div class="output" id="output"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script type="module">
       const inpimg = document.getElementById("inpimg");
-      inpimg.addEventListener("change", (event) => {
+      const ocrimg = (event) => {
         const imgfile = event.target.files[0];
         Tesseract.recognize(imgfile, "jpn", {
           logger: (m) => {
@@ -23,7 +24,8 @@
           console.log(imgfile);
           document.getElementById("output").innerHTML = text;
         });
-      });
+      };
+      inpimg.addEventListener("change", ocrimg);
     </script>
   </body>
 </html>
