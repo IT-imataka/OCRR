@@ -7,21 +7,25 @@
   </head>
   <body>
     <div class="wrapper">
-      <input type="file" name="capacity" id="imgfile" />
+      <input type="file" name="capacity" id="inpimg" />
       <div class="output" id="output"></div>
     </div>
     <script type="module">
       import { createWorker } from "tesseract.js";
     </script>
     <script>
-      (async () => {
-        const worker = await createWorker("jpn");
-        const ret = await worker.recognize(
-          document.getElementById("imgfile").files[0]
-        );
-        console.log(ret.data.text);
-        await worker.terminate();
-      })();
+      const inpimg = document.getElementById("inpimg");
+      inpimg.addEventListener("change", (event) => {
+        const imgfile = event.target.files[0];
+        (async () => {
+          const worker = await createWorker();
+          const ret = await worker.recognize(imgfile, "jpn", {
+            logger: (m) => console.log(m),
+          });
+          console.log(ret.data.text);
+          await worker.terminate();
+        })();
+      });
     </script>
   </body>
 </html>
