@@ -21,23 +21,17 @@
         await worker.load();
         await worker.loadLanguage("jpn");
         await worker.initialize("jpn");
-        const {
-          data: { text },
-        } = await worker.recognize(
-          "https://tesseract.projectnaptha.com/img/eng_bw.png"
-        );
-        console.log(text);
-      })();
-      const inpimg = document.getElementById("inpimg");
-      inpimg.addEventListener("change", (event) => {
-        const imgfile = event.target.files[0];
-        worker.recognize(imgfile).then({
-          data: (text) => {
-            console.log(text);
-            // document.getElementById("output").innerHTML = text;
-          },
+        const inpimg = document.getElementById("inpimg");
+        inpimg.addEventListener("change", (event) => {
+          const imgfile = event.target.files[0];
+          worker.recognize(imgfile).then({
+            data: (text) => {
+              console.log(text);
+              // document.getElementById("output").innerHTML = text;
+            },
+          });
         });
-      });
+      })();
     </script>
   </body>
 </html>
