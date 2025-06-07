@@ -16,22 +16,17 @@
       const worker = tesseract.createWorker({
         logger: (m) => console.log(m),
       });
-
-      (async () => {
-        await worker.load();
-        await worker.loadLanguage("jpn");
-        await worker.initialize("jpn");
-        const inpimg = document.getElementById("inpimg");
-        inpimg.addEventListener("change", (event) => {
-          const imgfile = event.target.files[0];
-          worker.recognize(imgfile).then({
-            data: (text) => {
-              console.log(text);
-              // document.getElementById("output").innerHTML = text;
-            },
-          });
+      const inpimg = document.getElementById("inpimg");
+      inpimg.addEventListener("change", (event) => {
+        const imgfile = event.target.files[0];
+        worker.recognize(imgfile).then({
+          data: (text) => {
+            console.log(text);
+            // document.getElementById("output").innerHTML = text;
+          },
         });
-      })();
+      });
+      worker.terminate();
     </script>
   </body>
 </html>
