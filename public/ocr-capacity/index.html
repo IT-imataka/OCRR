@@ -26,10 +26,12 @@
         img.src = URL.createObjectURL(imgfile);
         // console.log(img.width);
         const drawgird = () => {
-          const cardwidth = 65;
-          const cardheight = 85;
-          const beginx = 585;
-          const beginy = 255;
+          const cardwidth = 67.5;
+          const cardheight = 100;
+          const beginx = 537.5;
+          const beginy = 235;
+          const gapx = 10;
+          const gapy = 5;
           const rows = 4;
           const cols = 10;
 
@@ -38,10 +40,11 @@
 
           for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
-              const x = beginx + cardwidth * j;
-              const y = beginy + cardheight * i;
-              console.log(x);
-              console.log(y);
+              const x = beginx + (cardwidth + gapx) * j;
+              const y = beginy + (cardheight + gapy) * i;
+              if(){
+
+              }
               ctx.strokeRect(x, y, cardwidth, cardheight);
             }
           }
