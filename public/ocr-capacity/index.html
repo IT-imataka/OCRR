@@ -18,7 +18,7 @@
       console.log(img);
       const ocrimg = (event) => {
         const imgfile = event.target.files[0];
-        const img = new Img();
+        const img = new Image();
         console.log(img);
 
         Tesseract.recognize(imgfile, "jpn", {
