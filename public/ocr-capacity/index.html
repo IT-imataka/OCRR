@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>キャパシティ</title>
+    <title>キャパシティ判定ツール</title>
   </head>
   <body>
     <div class="wrapper">
@@ -14,8 +14,11 @@
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script type="module">
       const inpimg = document.getElementById("inpimg");
+      const img = new Img();
+      console.log(img);
       const ocrimg = (event) => {
         const imgfile = event.target.files[0];
+        const
         Tesseract.recognize(imgfile, "jpn", {
           logger: (m) => {
             console.log(m);
