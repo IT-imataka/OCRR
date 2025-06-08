@@ -8,7 +8,7 @@
   <body>
     <div class="wrapper">
       <input type="file" name="capacity" id="inpimg" />
-      <canvas style="display: none" id="outimg"></canvas>
+      <canvas style="" id="outimg"></canvas>
       <div class="output" id="output"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
@@ -17,22 +17,43 @@
 
       const ocrimg = (event) => {
         const imgfile = event.target.files[0];
+        const canvas = document.getElementById("outimg");
+        const ctx = canvas.getContext("2d");
         //ここからメモリ上だけで扱うimg要素を生成して以後このimg要素を加工する
         const img = new Image();
-        console.log(imgfile.width);
-
+        // console.log(imgfile.width);
         //アップ画像のURLを生成
         img.src = URL.createObjectURL(imgfile);
         // console.log(img.width);
+        const drawgird = () => {
+          const cardwidth = 65;
+          const cardheight = 85;
+          const beginx = 585;
+          const beginy = 255;
+          const rows = 4;
+          const cols = 10;
+
+          ctx.strokeStyle = "red";
+          ctx.lineWidth = 2;
+
+          for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+              const x = beginx + cardwidth * j;
+              const y = beginy + cardheight * i;
+              console.log(x);
+              console.log(y);
+              ctx.strokeRect(x, y, cardwidth, cardheight);
+            }
+          }
+        };
 
         img.onload = () => {
-          const canvas = document.getElementById("outimg");
-          const ctx = canvas.getContext("2d");
-          // console.log(ctx);
+          console.log(ctx);
           canvas.width = img.width;
           canvas.height = img.height;
 
           ctx.drawImage(img, 0, 0);
+          drawgird();
 
           Tesseract.recognize(canvas, "jpn", {
             logger: (m) => {
