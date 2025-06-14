@@ -1,6 +1,14 @@
 const inpimg = document.getElementById("inpimg");
 
 const ocrimg = (event) => {
+  const worker = Tesseract.createWorker({
+    workerPath:
+      "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js",
+    corePath:
+      "https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.0/tesseract-core-simd.wasm.js",
+    langPath: "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/lang/",
+  });
+
   const imgfile = event.target.files[0];
   const canvas = document.getElementById("outimg");
   const ctx = canvas.getContext("2d");
@@ -87,7 +95,7 @@ const ocrimg = (event) => {
         if (m.status === "recognizing text") {
           const progress = Math.floor(m.progress * 1000);
           progressbar.value = progress / 10;
-          output.innerText = `${num / 10}%`;
+          output.innerText = `${progress / 10}%`;
         }
       },
     }).then(({ data: { text } }) => {
