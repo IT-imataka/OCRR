@@ -48,7 +48,8 @@ const ocrimg = (event) => {
         maindeckcan.width = cardwidth;
         maindeckcan.height = cardheight;
         const maindeckcanctx = maindeckcan.getContext("2d");
-        maindeckcanctx.scale(3, 3);
+        maindeckcanctx.scale(1.1, 1.1);
+        console.log(maindeckcanctx);
         maindeckcanctx.drawImage(
           canvas, // 描画元
           x, //切り抜くx座標
