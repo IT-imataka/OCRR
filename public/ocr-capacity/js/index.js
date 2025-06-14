@@ -85,17 +85,20 @@ const ocrimg = (event) => {
 
     const output = document.getElementById("output");
     const progressbar = document.createElement("progress");
+    const progresstxt = document.createElement("span");
     progressbar.value = 0;
     progressbar.max = 100;
     output.appendChild(progressbar);
+    output.appendChild(progresstxt);
+    progresstxt.style = "margin-left:10px;";
 
     Tesseract.recognize(canvas, "jpn", {
       logger: (m) => {
-        console.log(m);
+        // console.log(m);
         if (m.status === "recognizing text") {
           const progress = Math.floor(m.progress * 1000);
           progressbar.value = progress / 10;
-          output.innerText = `${progress / 10}%`;
+          progresstxt.innerText = `${progress / 10}%`;
         }
       },
     }).then(({ data: { text } }) => {
