@@ -67,6 +67,7 @@ const ocrimg = (event) => {
     const ocrcards = async function () {
       for (const card of maindeck) {
         const result = await Tesseract.recognize(card, "eng", {
+          tessedit_char_whitelist: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
           logger: () => {},
         });
         // const {data:{text:text}} = result;
