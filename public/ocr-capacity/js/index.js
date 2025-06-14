@@ -75,19 +75,23 @@ const ocrimg = (event) => {
     ctx.drawImage(img, 0, 0);
     drawgird();
 
+    const output = document.getElementById("output");
+    const progressbar = document.createElement("progress");
+    progressbar.value = 0;
+    progressbar.max = 100;
+    output.appendChild(progressbar);
+
     Tesseract.recognize(canvas, "jpn", {
       logger: (m) => {
-        const progress = m.progress;
-        const num = Math.floor(progress * 1000);
-        const progressbar = document
-          .createElement("progress")
-          .setAttribute("value", "progress");
-        // output.appendChild(progressbar);
-        console.log(progressbar);
-        document.getElementById("output").innerText = `${num / 10}%`;
+        console.log(m);
+        if (m.status === "recognizing text") {
+          const progress = Math.floor(m.progress * 1000);
+          progressbar.value = progress / 10;
+          output.innerText = `${num / 10}%`;
+        }
       },
     }).then(({ data: { text } }) => {
-      document.getElementById("output").innerHTML = text;
+      output.innerHTML = text;
     });
   };
 };
