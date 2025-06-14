@@ -1,13 +1,11 @@
 const inpimg = document.getElementById("inpimg");
 
-const ocrimg = (event) => {
-  const worker = Tesseract.createWorker({
-    workerPath:
-      "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js",
-    corePath:
-      "https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.0/tesseract-core-simd.wasm.js",
-    langPath: "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/lang/",
-  });
+const worker = Tesseract.createWorker({
+  workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
+  corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.0/tesseract-core-simd.wasm.js',
+  langPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/lang/'
+});
+
 
   const imgfile = event.target.files[0];
   const canvas = document.getElementById("outimg");
