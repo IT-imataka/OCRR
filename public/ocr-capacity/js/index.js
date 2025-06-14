@@ -82,8 +82,8 @@ const ocrimg = (event) => {
         const progressbar = document
           .createElement("progress")
           .setAttribute("value", "progress");
-        output.innerText = `${progress / 10}%`;
-        output.appendChild(progressbar);
+        // output.appendChild(progressbar);
+        console.log(progressbar);
         document.getElementById("output").innerText = `${num / 10}%`;
       },
     }).then(({ data: { text } }) => {
