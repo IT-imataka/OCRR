@@ -12,60 +12,6 @@
       <div class="output" id="output"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-    <script type="module">
-      const inpimg = document.getElementById("inpimg");
-
-      const ocrimg = (event) => {
-        const imgfile = event.target.files[0];
-        const canvas = document.getElementById("outimg");
-        const ctx = canvas.getContext("2d");
-        //ここからメモリ上だけで扱うimg要素を生成して以後このimg要素を加工する
-        const img = new Image();
-        // console.log(imgfile.width);
-        //アップ画像のURLを生成
-        img.src = URL.createObjectURL(imgfile);
-        // console.log(img.width);
-        const drawgird = () => {
-          const cardwidth = 67.5;
-          const cardheight = 100;
-          const beginx = 537.5;
-          const beginy = 235;
-          const gapx = 10;
-          const gapy = 5;
-          const rows = 4;
-          const cols = 10;
-
-          ctx.strokeStyle = "red";
-          ctx.lineWidth = 2;
-
-          for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < cols; j++) {
-              const x = beginx + (cardwidth + gapx) * j;
-              const y = beginy + (cardheight + gapy) * i;
-              ctx.strokeRect(x, y, cardwidth, cardheight);
-            }
-          }
-        };
-
-        img.onload = () => {
-          console.log(ctx);
-          canvas.width = img.width;
-          canvas.height = img.height;
-
-          ctx.drawImage(img, 0, 0);
-          drawgird();
-
-          Tesseract.recognize(canvas, "jpn", {
-            logger: (m) => {
-              const num = Math.floor(m.progress * 1000);
-              document.getElementById("output").innerText = `${num / 10}%`;
-            },
-          }).then(({ data: { text } }) => {
-            document.getElementById("output").innerHTML = text;
-          });
-        };
-      };
-      inpimg.addEventListener("change", ocrimg);
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>
